@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        function logowanie(dane) {
+            if (dane.klub.value == "0" ) {
+                window.location.replace("pozdro.html");
+            }
+            else {
+                alert("ZŁE ODPOWIEDŹ");
+            }
+        }
+        function podpowiedz(){
+            alert("Lider I ligi");
+        }
+    </script>
+</head>
+
+<body>
+    <form name="formularz">
+        Zaznacz odpowiedni klub:<br> Lechia Gdańsk<input type="radio" name="klub" value="0"><BR>
+            FC Barcelona<input type="radio" name="klub" value="1"><BR>
+            Real Madryt<input type="radio" name="klub" value="2"><BR>
+            Manchester United<input type="radio" name="klub" value="3"><BR>
+            Liverpool<input type="radio" name="klub" value="4"><BR>
+        <input type="button" value="Logowanie..." onClick="logowanie(this.form)" /><br><br>
+        <input type="button" value="Podpowiedź" onClick="podpowiedz(this.form)" /><br><br>
+        <a href="zwierzak.html">Powrót do popzedniego kroku</a>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        function logowanie(dane) {
+            if (dane.haslo.value == "szczupak") {
+                window.location.replace("kolor.html");
+            }
+            else {
+                alert("ZŁE DANE");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form name="formularz">
+        Hasło: <input type="password" name="haslo" /><br><br>
+        <input type="button" value="Logowanie..." onClick="logowanie(this.form)" /><br><br>
+        <a href="login.html">Powrót do popzedniego kroku</a>
+    </form>
+</body>
+
+</html>

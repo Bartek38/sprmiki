@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        function logowanie(dane) {
+            if (dane.choice.value == "2") {
+                window.location.replace("klub.html");
+            }
+            else {
+                alert("ZŁA ODPOWIEDŹ");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form name="formularz">
+        Zaznacz odpowiednie zwierzę:<br> <input name="choice" type="radio" value="1">pies<BR>
+            <input name="choice" type="radio" value="2">bóbr<BR>
+            <input name="choice" type="radio" value="3">kot<BR><br><br>
+        <input type="button" value="Logowanie..." onClick="logowanie(this.form)" /><br><br>
+        <a href="kolor.html">Powrót do popzedniego kroku</a>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        function logowanie(dane) {
+            if (dane.kolor.value == "zielony") {
+                window.location.replace("zwierzak.html");
+            }
+            else {
+                alert("ZŁE DANE");
+            }
+        }
+
+        function podpowiedz(){
+            alert("Zaczyna się na z");
+        }
+    </script>
+</head>
+
+<body>
+    <form name="formularz">
+        Podaj odpowiedni kolor: <input type="text" name="kolor" /><br><br>
+        <input type="button" value="Logowanie..." onClick="logowanie(this.form)" /><br><br>
+        <input type="button" value="Podpowiedź" onClick="podpowiedz(this.form)" /><br><br>
+        <a href="haslo.html">Powrót do popzedniego kroku</a>
+    </form>
+</body>
+
+</html>
