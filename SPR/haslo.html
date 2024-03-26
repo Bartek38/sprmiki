@@ -2,12 +2,12 @@
 
 <head>
     <script type="text/javascript">
-        function logowanie(dane) {
-            if (dane.haslo.value == "szczupak") {
-                window.location.replace("kolor.html");
+        function logowanie(dane) { //tworzenie funkcji
+            if (dane.haslo.value == "szczupak") { //sprawdzanie wartości parametru
+                window.location.replace("kolor.html");//jeśli parametr ma wartość "szczupak" to przełącza się na koljeny kork
             }
             else {
-                alert("ZŁE DANE");
+                alert("ZŁE DANE");//jeśli hasło jest inne niż "szczupak" to wyświetla się alert ZŁE DANE
             }
         }
     </script>
@@ -15,8 +15,8 @@
 
 <body>
     <form name="formularz">
-        Hasło: <input type="password" name="haslo" /><br><br>
-        <input type="button" value="Logowanie..." onClick="logowanie(this.form)" /><br><br>
+        Hasło: <input type="password" name="haslo" /><br><br> <!--pole do wpisania hasła-->
+        <input type="button" value="Logowanie..." onClick="logowanie(this.form)" /><br><br><!--przycisk, który uruchami funkcje "logowanie"-->
         <a href="login.html">Powrót do popzedniego kroku</a>
     </form>
 </body>
