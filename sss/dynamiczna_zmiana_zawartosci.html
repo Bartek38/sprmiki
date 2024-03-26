@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamiczna zmiana zawartosci</title>
+</head>
+<body>
+
+<form id="formularz">
+    <label for="uzytkownicy">Wybierz użytkownika:</label>
+    <select id="uzytkownicy" onchange="WyswietlInfo()">
+        <option value="0">Wybierz użytkownika...</option>
+        <option value="1">Użytkownik 1</option>
+        <option value="2">Użytkownik 2</option>
+        <option value="3">Użytkownik 3</option>
+    </select><br><br>
+    
+    <label for="imie">Imię:</label>
+    <input type="text" id="imie" readonly><br><br>
+    
+    <label for="nazwisko">Nazwisko:</label>
+    <input type="text" id="nazwisko" readonly><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="text" id="email" readonly><br><br>
+</form>
+
+<script>
+// Tablica obiektów użytkowników
+const users = [
+    { id: 1, imie: "Jan", nazwisko: "Kowalski", email: "jan.kowalski@gmail.com" },
+    { id: 2, imie: "Anna", nazwisko: "Nowak", email: "anna.nowak@gmail.com" },
+    { id: 3, imie: "Piotr", nazwisko: "Wiśniewski", email: "piotr.wisniewski@gmail.com" }
+];
+
+// Funkcja wywoływana po zmianie wybranego użytkownika
+function WyswietlInfo() {
+    let Wybrany = document.getElementById("uzytkownicy").value;
+    if (Wybrany !== "0") {
+        let osoba = users.find(user => user.id === parseInt(Wybrany));
+        document.getElementById("imie").value = osoba.imie;
+        document.getElementById("nazwisko").value = osoba.nazwisko;
+        document.getElementById("email").value = osoba.email;
+    } else {
+        // Jeśli wybrano "Wybierz użytkownika...", czyść pola formularza
+        document.getElementById("imie").value = "";
+        document.getElementById("nazwisko").value = "";
+        document.getElementById("email").value = "";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walidacja - sprawdzian</title>
+    <style>
+        body
+        {
+            background-color: #333;
+        }
+        .Card
+        {
+            background-color: azure;
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+        }
+        button
+        {
+            padding: .5rem;
+            border: 1px solid #333;
+            cursor: pointer;
+            margin-top: .6em;
+            transition: 1s;
+        }
+        button:hover
+        {
+            background-color: rgb(215, 212, 212);
+        }
+        .wiadomosc
+        {
+            resize: none;
+        }
+        .bledy
+        {
+            color:red;
+            display: grid;
+            margin: 1rem auto;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form class="form">
+        <div class="Card">
+            <label for="osoba">Podaj swoje: Imię i Nazwisko</label>
+            <input class='osoba'name="osoba">
+
+            <label for="email">Podaj swój: E-mail</label>
+            <input class='email'name="email">
+
+            <label for="phone">Podaj swój: Telefon</label>
+            <input class='telefon'name="phone">
+
+            <label class="plec">Podaj swoją: Pleć</label>
+            <div class="wybor"><input name='plec'type="radio" class="kobieta">Kobieta<input name='plec'type="radio" class="mezczyzna">Mezczyzna</div>
+
+            <label for="wiadomosc">Napisz swoją opinie</label>
+            <textarea class='wiadomosc'name="wiadomosc"></textarea>
+
+            <button type='submit'class="send">Zakończ formularz</button>
+
+        </div>
+    </form>
+    <div class="bledy">
+    </div>
+    <script>
+        const osoba = document.querySelector('.osoba')
+        const email = document.querySelector('.email')
+        const date = document.querySelector('.date')
+        const telefon = document.querySelector('.telefon')
+        const wiadomosc = document.querySelector('.wiadomosc')
+        const form = document.querySelector('.form')
+        const wybor = document.querySelector('.wybor')
+        const kobieta = document.querySelector('.kobieta')
+        const mezczyzna = document.querySelector('.mezczyzna')
+        const wypiszbledy = document.querySelector('.bledy')
+
+        bledy = new Array() // tworzymy tablice 
+
+        let Warunekosoba = /[A-Z,a-z]\s[A-Z,a-z]/g
+        let Warunekmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        let Warunektelefon = /[0-9]{3}[0-9]{3}[0-9]{3}/
+        //tworzymy warunki za pomocą regexp
+        
+        function Sprawdzosoba() // funkcja sprawdzajaca
+        {
+            if(!(osoba.value.match(Warunekosoba))) // czy pasuje (imie spacja nazwisko)
+            {
+                bledy.push('Niepoprawne imie i nazwisko! Jedna spacja miedzy!') // jak nie dodaje blad do tablicy
+                return false // zwraca falsz
+            }
+            return true // jak jest git to zwraca true
+        }
+        // i tak samo z dalszymi
+        function Sprawdzmail()
+        {
+            if(!(email.value.match(Warunekmail)))
+            {
+                bledy.push('Niepoprawny Mail')
+                return false
+            }
+            return true
+        }
+        function Sprawdztelefon()
+        {
+            if(!(telefon.value.match(Warunektelefon)))
+            {
+                bledy.push('Niepoprawny telefon [xxxxxxxxx]')
+                return false
+            }
+            return true
+        }
+        function Sprawdzwiadomosc()
+        {
+            if(wiadomosc.value.length<40)
+            {
+                bledy.push('Niepoprawna opinia [wiecej niz 40 znakow]')
+                return false
+            }
+            return true
+        }
+        function Sprawdzplec()
+        {
+            if(kobieta.checked || mezczyzna.checked)
+            return true
+            else
+            {
+                bledy.push('Wybierz Plec')
+                return false
+            }
+        }
+        form.addEventListener('submit',event=>{
+            bledy.splice(0,bledy.length) // czysci tablice
+            if(!(Sprawdzosoba() && Sprawdzmail() && Sprawdztelefon() && Sprawdzplec() && Sprawdzwiadomosc())) // sprawdza wszystkie dane 
+            {
+                alert('bledne wpisane dane') // jak jest blad to informuje uzytkownika
+                event.preventDefault(); // zapobiega wysłanu formularza
+            }
+            wypiszbledy.textContent = ''   // czysci zawartosc wpisanych bledow
+            bledy.forEach(element => { // wypisuje cala zawartosc tablicy do diva
+                wypiszbledy.textContent += element
+            });
+        })
+
+    </script>
+</body>
+</html>

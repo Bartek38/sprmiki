@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wielokrotny</title>
+    <style>
+        .czesc
+        {
+            border: 1px solid #333;
+            padding: 1rem;
+            max-width: 300px;
+            background-color: #333;
+            color:white;
+            margin: 0 auto;
+            display: none;
+        }
+        .czesc.active
+        {
+            display: grid;
+        }
+        label 
+        {
+            margin-bottom: .25rem;
+        }
+        button
+        {
+            padding: .5rem;
+            border: 1px solid #333;
+            cursor: pointer;
+            margin-top: .6em;
+            transition: 1s;
+        }
+        button:hover
+        {
+            background-color: rgba(215, 212, 212, 0.667);
+        }
+    </style>
+</head>
+<body>
+    <form class="Wielokrotny-Formularz">
+        <div class="czesc">
+            <label for="email">E-mail</label>
+            <input name="email" type="email" required>
+            <label for="urodzenie">Data urodzenia</label>
+            <input type ='date'name="urodzenie" required>
+            <label for="miasto">Miasto</label>
+            <input type='text' name="miasto" class="miasto"  required>
+            <button type='button'class="nastepny">Następny</button>
+        </div>
+        <div class="czesc">
+            <label for="phone">nr Telefonu</label>
+            <input type='tel'name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required>
+            <button type='button' class="nastepny">Następny</button>
+            <button type='button'class="poprzedni">Poprzedni</button>
+        </div>
+        <div class="czesc">
+            <label for="Imie">Imię</label>
+            <input name="Imie" type="text" required>
+            <label for="Nazwisko">Nazwisko</label>
+            <input name="Nazwisko" type="text" required>
+            <button type='button' class="poprzedni">Poprzedni</button>
+            <button type='submit' class="submit">Zakończ</button>
+        </div> 
+    </form>
+    <script>
+        function wyswietlFormularz() // funckja pozwalająca na wyświetlenie obecnego etapu formularza
+        {
+            formularz.forEach((krok,index)=>{  
+                krok.classList.toggle('active',index === obecny)
+                // dla wszystkich czesci formularza za pomocą argumentow krok i index toogluje(jak jest to usuwa, jak nie ma takiej klasy obiekt to ją dodaje) clase 'active' gdy index === obecny 
+            })
+        }
+
+
+        const form = document.querySelector('.Wielokrotny-Formularz')
+        const formularz = [...document.querySelectorAll('.czesc')] // -> [... ] zmiana w tablicy by uzyc funkcji .foreach
+
+        //pobranie potrzebnych elementów do JS 
+        let obecny = formularz.findIndex(krok =>{ // ustawia obecną cześć formularza, za pomocą funkcji findIndex która zwraca index elementu z klasą active
+            return krok.classList.contains('active')
+        })
+        // jesli takiej klasy nie ma to funckja zwraca wartosc -1
+        
+        
+        if(obecny < 0) // jak nie ma zadnej klasy active to ustawia element 1 jako aktywny
+        {
+            obecny = 0;
+            wyswietlFormularz()
+        }
+        form.addEventListener('click',event=>{  
+            if(event.target.matches('.nastepny')) // gdy klikniemy w formularzu coś  z klasa nastepny
+            {
+                const inputy = [...formularz[obecny].querySelectorAll('input')] // pobranie wszystkich inputów z obecnej strony formularza i zamiana w tablice
+                const valid = inputy.every(input=>input.reportValidity()) // sprawdza poprawnośc wypełnienia
+                if(valid) // jak wszystko jest git to zwieksza obecny index o 1
+                obecny +=1
+            }
+            else if(event.target.matches('.poprzedni')) // gdy klikniemy w formularzu coś  z klasa poprzedni
+                obecny -=1 // zmniejsza obecny index o 1
+            wyswietlFormularz() // wyswietla kolejna/poprzednia czesc formularza
+        })
+    </script>
+</body>
+</html>
